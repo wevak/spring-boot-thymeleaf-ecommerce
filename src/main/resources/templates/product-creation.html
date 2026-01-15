@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product Creation</title>
+</head>
+<body>
+    <h1>Product Create Form</h1>
+		<form th:action="@{/products/create}" th:object="${product}" method="post">
+		  <div class="mb-3">
+		    <label for="exampleInputPassword1" class="form-label">Name</label>
+		    <input th:field="${product.name}" type="text" class="form-control" id="exampleInputPassword1">
+		  </div>
+			<div class="mb-3">
+		    <label for="exampleInputPassword1" class="form-label">Image Name</label>
+		    <input th:field="${product.imgName}" type="text" class="form-control" id="exampleInputPassword1">
+		  </div>
+			<div class="mb-3">
+		    <label for="exampleInputPassword1" class="form-label">Price</label>
+		    <input th:field="${product.price}" type="text" class="form-control" id="exampleInputPassword1">
+		  </div>
+			<div class="mb-3">
+		    <label for="exampleInputPassword1" class="form-label">Weight</label>
+		    <input th:field="${product.weight}" type="text" class="form-control" id="exampleInputPassword1">
+		  </div>
+			<div class="mb-3">
+		    <label for="exampleInputPassword1" class="form-label">Category Id</label>
+		    <!--<input th:field="${product.category.id}" type="text" class="form-control" id="exampleInputPassword1">-->
+				<select th:field="*{category.id}" class="form-select" required>
+            <option value="">-- Select Category --</option>
+            <option th:each="cat : ${categories}" 
+                    th:value="${cat.id}" 
+                    th:text="${cat.name}">
+            </option>
+        </select>
+		  </div>
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+</body>
+</html>

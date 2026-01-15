@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Category Updations</title>
+</head>
+<body>
+    <h1>Category Update Form</h1>
+    <!--<p>ID: <span th:text="${category.id}">123</span></p>
+    <p>Email: <span th:text="${category.name}">user@example.com</span></p>-->
+		<form th:action="@{/categories/update/{id}(id=${category.id})}" th:object="${category}" th:method="put">
+		  <div class="mb-3">
+		    <label for="exampleInputEmail1" class="form-label">Id</label>
+		    <input th:field="${category.id}" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+		  </div>
+		  <div class="mb-3">
+		    <label for="exampleInputPassword1" class="form-label">Name</label>
+		    <input th:field="${category.name}" type="text" class="form-control" id="exampleInputPassword1">
+		  </div>
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+</body>
+</html>

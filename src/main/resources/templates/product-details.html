@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product Details</title>
+</head>
+<body>
+    <h1>Product Information</h1>
+    <p>ID: <span th:text="${product.product_id}">123</span></p>
+    <p>Name: <span th:text="${product.name}">name</span></p>
+		<p>Price: <span th:text="${product.price}">111</span></p>
+		<p>Image Name: <span th:text="${product.imgName}">abcd.png</span></p>
+		<p>Weight: <span th:text="${product.weight}">111.11</span></p>
+		<p>Category Id: <span th:text="${product.category.id}">0</span></p>
+</body>
+</html>
