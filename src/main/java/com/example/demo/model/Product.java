@@ -21,6 +21,10 @@ public class Product {
 	@JoinColumn(name = "category_id", referencedColumnName = "id")
 	private Category category;
 
+	public Product() {
+		super();
+	}
+
 	public long getProduct_id() {
 		return product_id;
 	}

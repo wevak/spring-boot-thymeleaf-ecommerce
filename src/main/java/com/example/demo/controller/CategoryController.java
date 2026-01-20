@@ -106,7 +106,7 @@ public class CategoryController {
 	public String updatingSpecificCategory(@ModelAttribute("category") Category category, @PathVariable Long id) {
 		categoryService.specificCategoryUpdation(id, category);
 		
-		return "redirect:/categories";
+		return "redirect:/categories/list";
 	}
 	
 	@PutMapping("/update/hql/{id}")

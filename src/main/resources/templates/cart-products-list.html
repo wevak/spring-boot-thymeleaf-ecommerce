@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Products CRUD</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+		<style>
+       /* table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        tr:nth-child(even) { background-color: #f2f2f2; }*/
+    </style>
+</head>
+<body class="d-flex bg-light">
+		<div th:replace="~{components/navbar}"></div>
+		
+		<div class="container mt-5">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h3>Cart Products List</h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Id</th>
+														<th>Image</th>
+														<th>Product Id</th>                            
+														<th>User Id</th>
+														<th>Quantity</th>
+														<th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="cartProduct, iterationStatus : ${cartProducts}">
+                            <td th:text="${cartProduct.id}">1</td>
+														<td><img th:src="${cartProduct.product?.imgName}" alt="Product Image" width="160" /></td>
+                            <td 
+															th:text="${cartProduct.product?.product_id}">product name</td>
+														<!--<td>
+															<img th:src="${product.imgName}" alt="Product Image" width="200">
+														</td>-->
+														<td th:text="${cartProduct.user?.id}">1.1</td>
+														<td th:text="${cartProduct.quantity}">11</td>							
+														<td th:text="${cartProduct.product?.price}">11</td>
+                            <td>
+                                <!--<a class="btn btn-primary" th:href="@{/products/view/{id}(id=${product.product_id})}" role="button">Show</a>
+																<a class="btn btn-info" th:href="@{/products/update-screen/{id}(id=${product.product_id})}" role="button">Edit</a>-->
+																<form style="display: inline;" th:action="@{/user/cart/delete/{id}(id=${cartProduct.id})}" th:method="delete">
+																    <button type="submit" class="btn btn-danger">Delete</button>
+																</form>
+                            </td>
+                        </tr>
+												<tr>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td>Total:</td>
+													<td th:text="${cartTotalPrice}"></td>
+													<td>
+														<a class="btn btn-outline-info" th:href="@{/user/cart/checkout}">Checkout</a>
+													</td>
+												</tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+		
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.min.js"></script>
+</body>
+</html>

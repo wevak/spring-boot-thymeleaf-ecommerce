@@ -2,37 +2,48 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Product Updation</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Product Update Form</h1>
-    <!--<p>ID: <span th:text="${category.id}">123</span></p>
-    <p>Email: <span th:text="${category.name}">user@example.com</span></p>-->
-		<form th:action="@{/products/update/{id}(id=${product.product_id})}" th:object="${product}" th:method="put">
-		  <div class="mb-3">
-		    <label for="exampleInputEmail1" class="form-label">Id</label>
-		    <input th:field="${product.product_id}" disabled type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-		  </div>
-		  <div class="mb-3">
-		    <label for="exampleInputPassword1" class="form-label">Name</label>
-		    <input th:field="${product.name}" type="text" class="form-control" id="exampleInputPassword1">
-		  </div>
-			<div class="mb-3">
-		    <label for="exampleInputPassword1" class="form-label">Image Name</label>
-		    <input th:field="${product.imgName}" type="text" class="form-control" id="exampleInputPassword1">
-		  </div>
-			<div class="mb-3">
-		    <label for="exampleInputPassword1" class="form-label">Price</label>
-		    <input th:field="${product.price}" type="text" class="form-control" id="exampleInputPassword1">
-		  </div>
-			<div class="mb-3">
-		    <label for="exampleInputPassword1" class="form-label">Weight</label>
-		    <input th:field="${product.weight}" type="text" class="form-control" id="exampleInputPassword1">
-		  </div>
-			<div class="mb-3">
-		    <label for="exampleInputPassword1" class="form-label">Category Id</label>
-		    <input th:field="${product.category.id}" type="text" class="form-control" id="exampleInputPassword1">
-		  </div>
-		  <button type="submit" class="btn btn-primary">Submit</button>
-		</form>
+	<div class="container">
+		<h1>Product Update Form</h1>
+	    <!--<p>ID: <span th:text="${category.id}">123</span></p>
+	    <p>Email: <span th:text="${category.name}">user@example.com</span></p>-->
+			<form th:action="@{/products/update/{id}(id=${product.product_id})}" th:object="${product}" th:method="put">
+			  <div class="mb-3">
+			    <label for="exampleInputEmail1" class="form-label">Id</label>
+			    <input th:field="${product.product_id}" disabled type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+			  </div>
+			  <div class="mb-3">
+			    <label for="exampleInputPassword1" class="form-label">Name</label>
+			    <input th:field="${product.name}" type="text" class="form-control" id="exampleInputPassword1">
+			  </div>
+				<div class="mb-3">
+			    <label for="exampleInputPassword1" class="form-label">Image Name</label>
+			    <input th:field="${product.imgName}" type="text" class="form-control" id="exampleInputPassword1">
+			  </div>
+				<div class="mb-3">
+			    <label for="exampleInputPassword1" class="form-label">Price</label>
+			    <input th:field="${product.price}" type="text" class="form-control" id="exampleInputPassword1">
+			  </div>
+				<div class="mb-3">
+			    <label for="exampleInputPassword1" class="form-label">Weight</label>
+			    <input th:field="${product.weight}" type="text" class="form-control" id="exampleInputPassword1">
+			  </div>
+				<div class="mb-3">
+			    <label for="exampleInputPassword1" class="form-label">Category Id</label>
+			    <!--<input th:field="${product.category.id}" type="text" class="form-control" id="exampleInputPassword1">-->
+					<select th:field="*{category.id}" class="form-select" required>
+	            <option value="">-- Select Category --</option>
+	            <option th:each="cat : ${categories}" 
+	                    th:value="${cat.id}" 
+	                    th:text="${cat.name}">
+	            </option>
+	        </select>
+			  </div>
+			  <button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.min.js"></script>
 </body>
 </html>

@@ -16,20 +16,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.model.Category;
 import com.example.demo.model.Product;
 import com.example.demo.repository.CategoryRepository;
+import com.example.demo.service.CategoryService;
 import com.example.demo.service.ProductService;
 
 @Controller
 @RequestMapping("/products")
 public class ProductController {
-
-    private final CategoryRepository categoryRepository;
 	
+    @Autowired
+    private CategoryService categoryService;
+    
 	@Autowired
 	private ProductService productService;
 
-    ProductController(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
 	
 	@GetMapping("/list")
 	public String productsList(Model model) {
@@ -48,13 +47,16 @@ public class ProductController {
 	@GetMapping("/update-screen/{id}")
 	public String navigatingUpdateScreen(@PathVariable Long id, Model model) {
 		model.addAttribute("product", productService.getSpecificProduct(id));
+		model.addAttribute("categories", categoryService.getAllCategories());
+		
 		return "product-updation";
 	}
 	
 	@GetMapping("/create-screen")
 	public String navigatingCreateScreen(Model model) {
 		model.addAttribute("product", new Product());
-	    model.addAttribute("categories", categoryRepository.findAll());
+		model.addAttribute("categories", categoryService.getAllCategories());
+		
 		
 		return "product-creation";
 	}
