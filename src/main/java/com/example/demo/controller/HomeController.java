@@ -26,6 +26,11 @@ public class HomeController {
 	@Autowired
 	private UserService userService;
 	
+	@GetMapping("/")
+    public String root() {
+        return "redirect:/user/products"; // Redirects root to /home
+    }
+	
 	@GetMapping("/dashboard")
     public String index(Model model) {
 		model.addAttribute("productCount", productService.getAllProducts().size());
