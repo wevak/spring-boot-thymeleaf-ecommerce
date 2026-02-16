@@ -23,7 +23,8 @@
                         <tr>
                             <th>Id</th>
 														<th>Image</th>
-														<th>Product Id</th>                            
+														<th>Product Id</th>
+														<th>Product Name</th>                          
 														<th>User Id</th>
 														<th>Quantity</th>
 														<th>Price</th>
@@ -34,10 +35,11 @@
                             <td th:text="${cartProduct.id}">1</td>
 														<td><img th:src="${cartProduct.product?.imgName}" alt="Product Image" width="160" /></td>
                             <td 
-															th:text="${cartProduct.product?.product_id}">product name</td>
+															th:text="${cartProduct.product?.product_id}">product id</td>
 														<!--<td>
 															<img th:src="${product.imgName}" alt="Product Image" width="200">
 														</td>-->
+														<td th:text="${cartProduct.product?.name}">product name</td>
 														<td th:text="${cartProduct.user?.id}">1.1</td>
 														<td th:text="${cartProduct.quantity}">11</td>							
 														<td th:text="${cartProduct.product?.price}">11</td>
@@ -50,6 +52,7 @@
                             </td>
                         </tr>
 												<tr>
+													<td></td>
 													<td></td>
 													<td></td>
 													<td></td>

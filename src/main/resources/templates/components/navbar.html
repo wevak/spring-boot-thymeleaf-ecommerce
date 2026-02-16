@@ -44,6 +44,7 @@
               </a>
           </li>
       </ul>
+			<a class="btn btn-primary mb-5 mt-4" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
 			<form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
 			    <button class="btn btn-danger" type="submit">Logout</button>
 			</form>
