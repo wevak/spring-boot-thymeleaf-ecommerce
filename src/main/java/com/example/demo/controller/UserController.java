@@ -55,10 +55,16 @@ public class UserController {
 	}
 	
 	@GetMapping("/cart")
-	public String getCartProducts(Model model) {
-		model.addAttribute("cartProducts", cartService.getAllCartProducts());
+	public String getCartProducts(Model model, Principal principal) {
+		User currentUser = userService.findByEmail(principal.getName());
+		
+//		model.addAttribute("cartProducts", cartService.getAllCartProducts());
+		model.addAttribute("cartProducts", cartService.getAllUserSpecificCartProducts(currentUser.getId()));
 		model.addAttribute("categories", categoryService.getAllCategories());
-		model.addAttribute("cartTotalPrice", cartService.calculateTotalCartPrice());
+//		model.addAttribute("cartTotalPrice", cartService.calculateTotalCartPrice());
+		
+		
+		model.addAttribute("cartTotalPrice", cartService.calculateUserSpecificTotalCartPrice(currentUser.getId()));
 		
 		return "cart-products-list";
 	}
@@ -72,29 +78,41 @@ public class UserController {
 		
 		cartService.cartProductAddition(cart);
 		
-		model.addAttribute("cartProducts", cartService.getAllCartProducts());
+//		model.addAttribute("cartProducts", cartService.getAllCartProducts());
 		model.addAttribute("categories", categoryService.getAllCategories());
-		model.addAttribute("cartTotalPrice", cartService.calculateTotalCartPrice());
+		model.addAttribute("cartProducts", cartService.getAllUserSpecificCartProducts(currentUser.getId()));
+//		model.addAttribute("cartTotalPrice", cartService.calculateTotalCartPrice());
+		
+		model.addAttribute("cartTotalPrice", cartService.calculateUserSpecificTotalCartPrice(currentUser.getId()));
 		
 		return "cart-products-list";
 	}
 	
 	@DeleteMapping("/cart/delete/{id}")
-	public String cartItemDeletion(@PathVariable Long id, Model model) {
+	public String cartItemDeletion(@PathVariable Long id, Principal principal, Model model) {
+		User currentUser = userService.findByEmail(principal.getName());
 		
 		cartService.specificCartItemDeletion(id);
 		
-		model.addAttribute("cartProducts", cartService.getAllCartProducts());
+		model.addAttribute("cartProducts", cartService.getAllUserSpecificCartProducts(currentUser.getId()));
+//		model.addAttribute("cartProducts", cartService.getAllCartProducts());
 		model.addAttribute("categories", categoryService.getAllCategories());
-		model.addAttribute("cartTotalPrice", cartService.calculateTotalCartPrice());
+		
+		model.addAttribute("cartTotalPrice", cartService.calculateUserSpecificTotalCartPrice(currentUser.getId()));
+//		model.addAttribute("cartTotalPrice", cartService.calculateTotalCartPrice());
 		
 		return "cart-products-list";
 	}
 	
 	@GetMapping("/cart/checkout")
-	public String cartCheckout(Model model) {
-		model.addAttribute("cartItems", cartService.getAllCartProducts());
-		model.addAttribute("cartTotalPrice", cartService.calculateTotalCartPrice());
+	public String cartCheckout(Model model, Principal principal) {
+		User currentUser = userService.findByEmail(principal.getName());
+		
+		model.addAttribute("cartItems", cartService.getAllUserSpecificCartProducts(currentUser.getId()));
+		
+		model.addAttribute("cartTotalPrice", cartService.calculateUserSpecificTotalCartPrice(currentUser.getId()));
+//		model.addAttribute("cartItems", cartService.getAllCartProducts());
+//		model.addAttribute("cartTotalPrice", cartService.calculateTotalCartPrice());
 //		model.addAttribute("checkoutForm", new CheckoutRequest());
 		
 		return "checkout";

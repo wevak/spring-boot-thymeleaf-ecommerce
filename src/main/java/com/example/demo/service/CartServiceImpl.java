@@ -25,6 +25,12 @@ public class CartServiceImpl implements CartService {
 		
 		return cartRepository.findAll();
 	}
+	
+	@Override
+	public List<Cart> getAllUserSpecificCartProducts(Long id) {
+		
+		return cartRepository.findByUserId(id);
+	}
 
 	@Override
 	public String specificCartItemDeletion(Long id) {
@@ -46,5 +52,14 @@ public class CartServiceImpl implements CartService {
 		return cartProducts.stream()
 							.mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity())
 				            .sum();
+	}
+	
+	@Override
+	public double calculateUserSpecificTotalCartPrice(Long id) {
+		List<Cart> userSpecificCartItems = cartRepository.findByUserId(id);
+		
+		return userSpecificCartItems.stream()
+				.mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity())
+	            .sum();
 	}
 }

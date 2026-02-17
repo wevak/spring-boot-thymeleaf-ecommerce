@@ -7,9 +7,13 @@ import com.example.demo.model.Cart;
 public interface CartService {
 	List<Cart> getAllCartProducts();
 	
+	public List<Cart> getAllUserSpecificCartProducts(Long id);
+	
 	Cart cartProductAddition(Cart item);
 	
 	String specificCartItemDeletion(Long id);
 	
 	double calculateTotalCartPrice();
+	
+	public double calculateUserSpecificTotalCartPrice(Long id);
 }
